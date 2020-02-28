@@ -16,9 +16,9 @@ public class TesteHibernate {
 		
 		UsuarioPessoa pessoa = new UsuarioPessoa();
 		pessoa.setIdade(45);
-		pessoa.setNome("Marciano");
-		pessoa.setSobrenome("Santos");
-		pessoa.setEmail("marcianosantos@gmail.com");
+		pessoa.setNome("Ezio");
+		pessoa.setSobrenome("Lemes");
+		pessoa.setEmail("eziolemes@gmail.com");
 		pessoa.setLogin("teste");
 		pessoa.setSenha("123");
 		
@@ -164,11 +164,28 @@ public class TesteHibernate {
 		
 		TelefoneUser telefoneUser = new TelefoneUser();
 		telefoneUser.setTipo("Celular");
-		telefoneUser.setNumero("69-99606-5641");
+		telefoneUser.setNumero("69-8107-0656");
 		telefoneUser.setUsuarioPessoa(pessoa);
-		telefoneUser.setId(1L);
 		
 		daoGeneric.salvar(telefoneUser);
+	}
+	
+	@Test
+	public void testeConsultaTelefone() {
+		DaoGeneric daoGeneric = new DaoGeneric();
+		
+		UsuarioPessoa p = new UsuarioPessoa();
+		p.setId(1L);
+		
+		UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.pesquisar(p);
+		
+		for (TelefoneUser fone : pessoa.getTelefoneUsers()) {
+			System.out.println(fone.getNumero());
+			System.out.println(fone.getTipo());
+			System.out.println(fone.getUsuarioPessoa().getNome());
+			System.out.println("------------------------------------------");
+		}
+		
 	}
 
 }
